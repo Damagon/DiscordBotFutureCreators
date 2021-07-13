@@ -1,3 +1,6 @@
+//Need to download libraries using the following command:
+//npm install @discordjs/opus ffmpeg-static yt-search ytdl-core
+
 const Discord = require("discord.js");
 const { prefix, token } = require("./config.json");
 const ytdl = require("ytdl-core");
