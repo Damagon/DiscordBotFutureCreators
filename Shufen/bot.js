@@ -4,6 +4,8 @@
 const Discord = require("discord.js");
 const { prefix, token } = require("./config.json");
 const ytdl = require("ytdl-core");
+const TicTacToe = require('discord-tictactoe');
+
 
 const client = new Discord.Client();
 
@@ -20,6 +22,9 @@ client.once("reconnecting", () => {
 client.once("disconnect", () => {
   console.log("Disconnect!");
 });
+
+new TicTacToe({ language: 'en', command: '-ttt' })
+  .attach(client);
 
 client.on("message", async message => {
   if (message.author.bot) return;
@@ -110,28 +115,19 @@ function play(guild, song) {
 }
 
 function pause(message, server) {
-  if (!server)
-    return message.channel.send("There is no song that I could pause!");
   server.connection.dispatcher.pause();
   server.textChannel.send('Music Paused! To continue, use command "!resume"');
 }
-
+ 
 function resume(message, server) {
-  if (!server)
-    return message.channel.send("There is no song that I could resume!");
   server.connection.dispatcher.resume();
 }
-
+ 
 function skip(message, server) {
-  if (!server)
-    return message.channel.send("There is no song that I could skip!");
   server.connection.dispatcher.end();
 }
-
-function stop(message, server) {
-  if (!server)
-    return message.channel.send("There is no song that I could stop!");
-    
+ 
+function stop(message, server) {    
   server.songs = [];
   server.connection.dispatcher.end();
 }
