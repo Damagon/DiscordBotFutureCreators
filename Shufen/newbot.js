@@ -45,9 +45,6 @@ client.on('ready', () => {
 console.log(`${client.user.tag} has logged in.`);
 });
 
-new TicTacToe({ language: 'en', command: '!ttt' })
-  .attach(client);
-
 client.on('message', async (message) => {
   if (message.content === '_rps') {
       const embed= new MessageEmbed()
